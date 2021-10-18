@@ -4,24 +4,24 @@
 
 Enemy::Enemy() 
 {
-	// ƒ‚ƒfƒ‹•`‰æˆ—‚ğ‰Šú‰»B
+	// ãƒ¢ãƒ‡ãƒ«æç”»å‡¦ç†ã‚’åˆæœŸåŒ–ã€‚
 	ModelInitData modelInitData;
 	modelInitData.m_tkmFilePath = "Assets/modelData/enemy/enemy.tkm";
 	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
 	m_model.Init(modelInitData);
 }
 /// <summary>
-/// –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚éXVˆ—B
+/// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã°ã‚Œã‚‹æ›´æ–°å‡¦ç†ã€‚
 /// </summary>
 void Enemy::Update()
 {
-	// step-5 ˆÚ“®ˆ—‚ğEnemyRandomMove‚ÉˆÏ÷‚·‚éB
+	// step-4 ç§»å‹•å‡¦ç†ã‚’EnemyRandomMoveã«å§”è­²ã™ã‚‹ã€‚
 	m_randomMove.Execute(m_position);
 
 	m_model.UpdateWorldMatrix(m_position, g_quatIdentity, g_vec3One);
 }
 /// <summary>
-/// –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚é•`‰æˆ—B
+/// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã°ã‚Œã‚‹æç”»å‡¦ç†ã€‚
 /// </summary>
 /// <param name="rc"></param>
 void Enemy::Draw(RenderContext& rc)
