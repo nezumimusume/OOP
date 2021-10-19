@@ -24,7 +24,7 @@ public:
 	void Draw(RenderContext& rc);
 private:
 	// step-1 唯一のインスタンスを記憶するためのstaticメンバ変数を宣言する。
-	static Game* m_instance;	// 唯一のインスタンス。
+	static InGame* m_instance;	// 唯一のインスタンス。
 
 	Player m_player;			// プレイヤー
 	Ground m_ground;			// 地面

@@ -175,7 +175,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
         // 実習課題。
         // リドゥを実装してください。
-        // 
+        
+
         // 1フレーム終了
         g_engine->EndFrame();
     }
