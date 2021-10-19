@@ -40,11 +40,12 @@ public:
 	/// <summary>
 	/// オブザーバーにイベントを通知する。
 	/// </summary>
-	/// <param name="event"></param>
-	void Notify(int event)
+	/// <param name="event">イベント</param>
+	/// <param name="arg_0">引数</param>
+	void Notify(int event, int arg_0)
 	{
 		for (auto& o : m_observerList) {
-			o->OnNotify( this, event );
+			o->OnNotify( this, event, arg_0 );
 		}
 	}
 private:

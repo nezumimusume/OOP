@@ -7,6 +7,20 @@ class Player : public Subject
 {
 public:
 	/// <summary>
+	/// イベント
+	/// </summary>
+	enum EnEvent {
+		enEvent_ChangeState,	// 状態が切り替わった。
+	};
+	/// <summary>
+	/// 状態
+	/// </summary>
+	enum EnState {
+		enState_Idle,
+		enState_Jump,
+		enState_Num,
+	};
+	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	Player();
@@ -21,14 +35,7 @@ public:
 	void Draw(RenderContext& rc);
 	
 private:
-	/// <summary>
-	/// 状態
-	/// </summary>
-	enum EnState {
-		enState_Idle,
-		enState_Jump,
-		enState_Num,
-	};
+	
 	EnState m_state = enState_Idle;		// 状態。
 	Model m_model;							// モデル描画処理。
 	Vector3 m_position;						// 座標。

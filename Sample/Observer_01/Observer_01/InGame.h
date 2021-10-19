@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "Ground.h"
+#include "Achievement.h"
 
 class InGame
 {
@@ -22,27 +23,11 @@ public:
 	/// 描画処理。
 	/// </summary>
 	void Draw(RenderContext& rc);
-	/// <summary>
-	/// インスタンスを取得。
-	/// </summary>
-	/// <returns></returns>
-	static InGame& GetInstance()
-	{
-		return *m_instance;
-	}
-	/// <summary>
-	/// プレイヤーのインスタンスを取得。
-	/// </summary>
-	/// <returns></returns>
-	Player& GetPlayer()
-	{
-		return m_player;
-	}
 private:
-	// step-1 唯一のインスタンスを記憶するためのstaticメンバ変数を宣言する。
+	// 唯一のインスタンスを記憶するためのstaticメンバ変数を宣言する。
 	static InGame* m_instance;	// 唯一のインスタンス。
-
 	Player m_player;			// プレイヤー
+	Achievement m_achivement;	// 実績
 	Ground m_ground;			// 地面
 };
 

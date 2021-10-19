@@ -12,6 +12,7 @@ Player::Player()
 
 void Player::Update(InGame& inGame)
 {
+	auto oldState = m_state;
 	switch (m_state) {
 	case enState_Idle:
 		if (g_pad[0]->IsTrigger(enButtonA)) {
@@ -33,6 +34,10 @@ void Player::Update(InGame& inGame)
 			m_state = enState_Idle;
 		}
 		break;
+	}
+	if (oldState != m_state) {
+		// 状態が切り替わったことをオブザーバーに通知する
+		Notify(enEvent_ChangeState, m_state);
 	}
 	
 	m_model.UpdateWorldMatrix(m_position, g_quatIdentity, g_vec3One);

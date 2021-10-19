@@ -4,7 +4,8 @@
 
 InGame* InGame::m_instance = nullptr;
 
-InGame::InGame()
+InGame::InGame() :
+	m_achivement(m_player)
 {
 	if (m_instance != nullptr) {
 		MessageBox(nullptr, L"InGameクラスのインスタンスが複数作られています！", L"エラー", MB_OK);
@@ -22,7 +23,7 @@ InGame::~InGame()
 void InGame::Update()
 {
 	// プレイヤーの更新処理を呼び出す。
-	m_player.Update();
+	m_player.Update(*this);
 }
 
 void InGame::Draw(RenderContext& rc)
