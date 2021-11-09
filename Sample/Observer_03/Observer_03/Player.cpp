@@ -41,6 +41,7 @@ void Player::Update(InGame& inGame)
 		if ( m_position.y < 0.0f ) {
 			m_position.y = 0.0f;
 			// 地面についたので、待機状態に遷移する。
+			m_moveSpeed.y = 0.0f;
 			m_state = enState_Idle;
 		}
 		break;
