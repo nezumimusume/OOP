@@ -32,13 +32,21 @@ public:
 	/// <param name="event"></param>
 	/// <param name="arg_0"></param>
 	void OnNotify(Subject* pSubject, int event, int arg_0) override;
+	/// <summary>
+	/// 敵のリストを取得。
+	/// </summary>
+	/// <returns></returns>
+	const std::list<Enemy*>& GetEnemyList() const
+	{
+		return m_enemyList;
+	}
 private:
 	// 唯一のインスタンスを記憶するためのstaticメンバ変数を宣言する。
 	static InGame* m_instance;		// 唯一のインスタンス。
 	Player m_player;						// プレイヤー
-	Enemy* m_enemy = nullptr;		// エネミーリスト
+	std::list<Enemy*> m_enemyList;	// エネミーのリスト
+	
 	Achievement m_achivement;		// 実績
 	Ground m_ground;					// 地面
 	int m_enemyPopTimer = 0;			// エネミーをポップさせるタイマー。
 };
-

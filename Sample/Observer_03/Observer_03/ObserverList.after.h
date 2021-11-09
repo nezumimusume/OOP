@@ -17,7 +17,9 @@ private:
 	Node* m_tailNode = nullptr;					//	終端ノード。
 
 	// step-1 カスタムアロケーター用のメンバ変数を追加。
-	
+	Node m_nodeArray[MAX_NODE];			// ノードの配列
+	Node* m_unuserNodeArray[MAX_NODE];	// 未使用ノードの配列
+	int m_numUnuseNode = 0;						// 未使用ノードの数。
 public:
 	/// <summary>
 	/// コンストラクタ。
@@ -43,5 +45,9 @@ public:
 	}
 private:
 	// step-2 カスタムメモリアロケータ用のメモリ確保関数と開放関数を定義する
+	// 新しいノードを確保。
+	Node* AllocNode();
+	// ノードを開放。
+	void FreeNode(Node* n);
 
 };

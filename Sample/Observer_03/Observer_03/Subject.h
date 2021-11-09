@@ -2,7 +2,11 @@
 
 #include <algorithm>
 #include "Observer.h"
+#ifdef BEFORE
+#include "ObserverList.before.h"
+#else
 #include "ObserverList.h"
+#endif
 
 /// <summary>
 /// ŠÄ‹‘ÎÛ–ğ‚ÌƒNƒ‰ƒXB

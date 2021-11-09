@@ -15,3 +15,5 @@ private:
 	Model m_model;	// ƒ‚ƒfƒ‹•`‰æˆ—B
 };
 
+
+

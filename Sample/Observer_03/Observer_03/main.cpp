@@ -15,8 +15,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     //////////////////////////////////////
     // ここから初期化を行うコードを記述する
     //////////////////////////////////////
-    g_camera3D->SetPosition( 0.0f, 80.0f, 200.0f);
-    g_camera3D->SetTarget( 0.0f, 80.0f, 0.0f );
 
     // InGameクラスのインスタンスを生成する。
     InGame inGame;

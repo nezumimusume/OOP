@@ -2,6 +2,22 @@
 #include "InGame.h"
 #include "Enemy.h"
 
+// マップテーブル
+static constexpr int MAP_TBL[NUM_GRID_Z][NUM_GRID_X] = {
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+	{ 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+	{ 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+	{ 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+	{ 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+	{ 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+	{ 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
+};
 InGame* InGame::m_instance = nullptr;
 
 InGame::InGame() :
@@ -12,6 +28,8 @@ InGame::InGame() :
 		std::abort();
 	}
 
+	g_camera3D->SetPosition(1000.0f, 500.0f, 1500.0f);
+	g_camera3D->SetTarget(1000.0f, 0.0f, 1000.0f);
 	m_player.AddObserver(this);
 	// インスタンスのアドレスを記憶する。
 	m_instance = this;
@@ -20,6 +38,9 @@ InGame::InGame() :
 InGame::~InGame()
 {
 	m_instance = nullptr;
+	for (Enemy* en : m_enemyList) {
+		delete en;
+	}
 }
 
 void InGame::Update()
@@ -27,13 +48,26 @@ void InGame::Update()
 	// プレイヤーの更新処理を呼び出す。
 	m_player.Update(*this);
 
-	m_enemyPopTimer++;
-	if (m_enemyPopTimer == 120) {
-		// 古いエネミーを削除
-		delete m_enemy;
-		m_enemy = new Enemy(m_player);
-		m_enemyPopTimer = 0;
-
+	if (m_enemyList.size() < 40) {
+		m_enemyPopTimer++;
+		if (m_enemyPopTimer == 140) {
+			// 古いエネミーを削除
+			//delete m_enemy;
+			Enemy* newEnemy = new Enemy(m_player, MAP_TBL);
+			m_enemyList.push_back(newEnemy);
+			m_enemyPopTimer = 0;
+		}
+	}
+	auto it = m_enemyList.begin();
+	while( it != m_enemyList.end()){
+		if ((*it)->Update() == false) {
+			delete* it;
+			it = m_enemyList.erase( it );
+			
+		}
+		else {
+			it++;
+		}
 	}
 }
 void InGame::OnNotify(Subject* pSubject, int event, int arg_0)
@@ -46,11 +80,13 @@ void InGame::OnNotify(Subject* pSubject, int event, int arg_0)
 			}
 		}
 	}
-	
 }
 void InGame::Draw(RenderContext& rc)
 {
 	// プレイヤーと地面の描画処理を呼び出す。
 	m_player.Draw(rc);
 	m_ground.Draw(rc);
+	for (Enemy* en : m_enemyList) {
+		en->Draw(rc);
+	}
 }

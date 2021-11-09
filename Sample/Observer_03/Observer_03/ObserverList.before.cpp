@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ObserverList.h"
+#include "ObserverList.before.h"
 
 ObserverList::ObserverList()
 {
@@ -18,6 +18,7 @@ void ObserverList::Add(Observer* o)
 	else {
 		// 空じゃなければ、終端ノードのnextにつなげる。
 		m_tailNode->nextNode = newNode;
+		m_tailNode = newNode;
 	}
 }
 void ObserverList::Remove(Observer* o)
@@ -42,6 +43,7 @@ void ObserverList::Remove(Observer* o)
 			else if (p == m_tailNode) {
 				// 終端ノード。
 				m_tailNode = prevNode;
+				prevNode->nextNode = nullptr;
 			}
 			else {
 				// 間のノード。
