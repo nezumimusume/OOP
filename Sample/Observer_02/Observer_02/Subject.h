@@ -59,7 +59,6 @@ public:
 					// 間のオブザーバー。
 					// リンクを入れ替える。
 					oPrev->SetNext(o->GetNext());
-
 				}
 				break;
 			}

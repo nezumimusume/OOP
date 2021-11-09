@@ -15,7 +15,7 @@ Achievement::~Achievement()
 }
 void Achievement::OnNotify(Subject* pSubject, int event, int arg_0)
 {
-	if (m_player == pSubject) {&
+	if (m_player == pSubject) {
 		// メッセージを送ってきたのがプレイヤー。
 		if (event == Player::enEvent_ChangeState) {
 			// プレイヤーの状態が変化した。
