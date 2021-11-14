@@ -20,13 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="TouchAndroid.cpp" />
-    <ClCompile Include="TouchIOS.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ITouch.h" />
-    <ClInclude Include="TouchAndroid.h" />
-    <ClInclude Include="TouchIOS.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
