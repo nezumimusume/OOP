@@ -6,9 +6,8 @@ int main()
 {
     // ゲームワールドクラスのオブジェクトを定義。
     GameWorld gameWorld;
-
-    // step-5 インゲームクラスのゲームオブジェクトを生成。
-    
+    // step-4 インゲームクラスのゲームオブジェクトを生成。
+    gameWorld.NewGameObject<InGame>();
     // ゲームループを実行。
     gameWorld.ExecuteGameLoop();
 

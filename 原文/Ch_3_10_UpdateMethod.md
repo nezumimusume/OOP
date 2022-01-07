@@ -140,20 +140,23 @@ gameWorld.ExecuteGameLoop();
 &emsp;さて、これでUpdateMethodパターンを利用できるゲームワールドクラスは作成できました。しかし、まだゲームオブジェクトが一切実装されていないので、実行しても何もおきません。では、次のハンズオンで簡単な敵キャラクターのゲームオブジェクトを実装していきましょう。
 
 ## 10.2【ハンズオン】UpateMethodパターンを利用する。
-&emsp;10.1のハンズオンでUpdateMethodパターンを利用したゲームワールドを実装しました。では、10.2ではUpdateMethodパターンを利用して、簡単なゲームプログラムを実装してみましょう。今回作成するゲームは、一定時間で骸骨のモンスターが現れるだけのゲームです。では、UpdateMethod_01/UpdateMethod_01.slnを開いてください。
+&emsp;10.1のハンズオンでUpdateMethodパターンを利用したゲームワールドを実装しました。では、10.2ではUpdateMethodパターンを利用して、簡単なゲームプログラムを実装してみましょう。今回作成するゲームは、一定時間で骸骨のモンスターが現れるだけのゲームです。では、UpdateMethod_02/UpdateMethod_02.slnを開いてください。
 
 ### step-1 IGameObjectを継承して、インゲームの処理を制御するクラスを宣言する
 &emsp;まずはインゲームを制御するInGameクラスを追加しましょう。このクラスの仕事は一定時間で骸骨のモンスターをスポーンすることです。では、InGame.hを開いて、該当するコメントの箇所に次のプログラムを入力してください。</br>
 [InGame.h]
 ```cpp
+
 // step-1 IGameObjectを継承して、インゲームの処理を制御するクラスを宣言する。
 #include "IGameObject.h"
 
-// インゲームクラス宣言
+// インゲームクラス。
 class InGame : public IGameObject
 {
 public:
-	// 毎フレーム呼ばれる更新処理
+	/// <summary>
+	/// 毎フレーム呼ばれる更新処理
+	/// </summary>
 	void Update(const UpdateArg& arg) override;
 private:
 	float m_spawnTimer = 0.0f;		// 敵キャラクターのスポーンタイマー。(単位:秒)
@@ -188,10 +191,15 @@ void InGame::Update(const UpdateArg& arg)
 class Skeleton : public IGameObject
 {
 public:
-	// コンストラクタ
-	// no : スケルトンの番号。
+	/// <summary>
+	/// コンストラクタ。
+	/// </summary>
+	/// <param name="no">スケルトンの番号</param>
 	Skeleton(int no);
-	// 毎フレーム呼ばれる更新処理。
+	/// <summary>
+	/// 毎フレーム呼ばれる更新処理。
+	/// </summary>
+	/// <param name="arg"></param>
 	void Update(const UpdateArg& arg) override;
 private:
 	float m_shoutTimer = 0.0f;	// 叫びタイマー
@@ -232,8 +240,7 @@ void Skeleton::Update(const UpdateArg& arg)
 ```
 
 ### step-5 インゲームクラスのゲームオブジェクトを生成。
-&emsp;では、これで最後です。インゲームクラスのゲームオブジェクトを生成して、インゲームの処理を毎フレーム実行できるようにしましょう。main.cppを開いて次のプログラムを入力してください。</br>
-[main.cpp]
+&emsp;では、これで最後です。インゲームクラスのゲームオブジェクトを生成して、インゲームの処理を毎フレーム実行できるようにしましょう。main.cppを開いて次のプログラムを入力してください。
 ```cpp
 // step-5 インゲームクラスのゲームオブジェクトを生成。
 gameWorld.NewGameObject<InGame>();
